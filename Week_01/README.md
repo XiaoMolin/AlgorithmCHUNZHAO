@@ -55,20 +55,20 @@
 
 ```go
 func maxArea(height []int) int {
-	res:=0
-	left,right:= 0,len(height)-1
-	for left<right{
-		if height[left]<height[right]{
-            if (right-left)*height[left]>res{
-                res = (right-left)*height[left]
-            }
-            left++
-        }else{
-            if (right-left)*height[right]>res{
-                res = (right-left)*height[right]
-            }
-            right--
-        }
+	res := 0
+	left, right := 0, len(height)-1
+	for left < right {
+		if height[left] < height[right] {
+			if (right-left)*height[left] > res {
+				res = (right - left) * height[left]
+			}
+			left++
+		} else {
+			if (right-left)*height[right] > res {
+				res = (right - left) * height[right]
+			}
+			right--
+		}
 	}
 	return res
 }
