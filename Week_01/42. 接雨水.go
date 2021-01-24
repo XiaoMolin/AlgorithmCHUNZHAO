@@ -21,6 +21,7 @@ func main() {
 	fmt.Println(trap(height))
 }
 
+//双指针
 func trap(height []int) int {
 	left, right, leftMax, rightMax, res := 0, 0, 0, 0, 0
 	right = len(height) - 1
@@ -47,4 +48,32 @@ func trap(height []int) int {
 
 	}
 	return res
+}
+
+//栈
+func trap2(height []int) int {
+	stack := []int{}
+	res := 0
+	for i := 0; i < len(height); i++ {
+		for len(stack) != 0 && height[i] > height[stack[len(stack)-1]] {
+			h := height[stack[len(stack)-1]]
+			stack = stack[:len(stack)-1]
+			if len(stack) == 0 {
+				break
+			}
+			distance := i - stack[len(stack)-1] - 1
+			min := min(height[stack[len(stack)-1]], height[i])
+			res += distance * (min - h)
+		}
+		stack = append(stack, i)
+	}
+
+	return res
+}
+
+func min(x, y int) int {
+	if x < y {
+		return x
+	}
+	return y
 }
