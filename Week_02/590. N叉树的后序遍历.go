@@ -44,3 +44,30 @@ func postorder1(root *Node) []int {
 	}
 	return res
 }
+
+//颜色标记
+func postorder2(root *Node) []int {
+	w, g := 1, 0
+	type s struct {
+		node  *Node
+		color int
+	}
+	res := []int{}
+	stack := []s{{root, w}}
+	for len(stack) != 0 {
+		node, color := stack[len(stack)-1].node, stack[len(stack)-1].color
+		stack = stack[:len(stack)-1]
+		if root == nil {
+			continue
+		}
+		if color == w {
+			stack = append(stack, s{node, g})
+			for i := len(node.Children) - 1; i >= 0; i-- {
+				stack = append(stack, s{node.Children[i], w})
+			}
+		} else {
+			res = append(res, node.Val)
+		}
+	}
+	return res
+}
