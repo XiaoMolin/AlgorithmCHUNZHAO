@@ -1,12 +1,11 @@
 package main
 
 import (
-	"container/heap"
 	"fmt"
 )
 
 func main() {
-	fmt.Println(maxSlidingWindow2([]int{1, 3, -1, -3, 5, 3, 6, 7}, 3))
+	fmt.Println(maxSlidingWindow([]int{1, 3, -1, -3, 5, 3, 6, 7}, 3))
 }
 
 //双端队列
