@@ -1,0 +1,71 @@
+package main
+
+//给定一个二叉树，找出其最大深度。
+//
+//二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+//
+//说明: 叶子节点是指没有子节点的节点。
+//
+//示例：
+//给定二叉树 [3,9,20,null,null,15,7]，
+//
+//3
+/// \
+//9  20
+///  \
+//15   7
+//返回它的最大深度 3 。
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func main() {
+	maxDepth(&TreeNode{})
+}
+
+// 递归
+func maxDepth(root *TreeNode) int {
+
+	if root == nil {
+		return 0
+	}
+	return max(maxDepth(root.Left), maxDepth(root.Right)) + 1
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+//迭代
+func maxDepth2(root *TreeNode) int {
+
+	if root == nil {
+		return 0
+	}
+	dep := 0
+	q := make([]*TreeNode, 0)
+	q = append(q, root)
+	length := len(q)
+	for length > 0 {
+		dep++
+		for i := 0; i < length; i++ {
+			node := q[0]
+			q = q[1:]
+			if node.Left != nil {
+				q = append(q, node.Left)
+			}
+			if node.Right != nil {
+				q = append(q, node.Right)
+			}
+		}
+		length = len(q)
+	}
+	return dep
+
+}
