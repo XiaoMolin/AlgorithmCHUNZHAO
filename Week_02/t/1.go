@@ -2,13 +2,12 @@ package main
 
 import "fmt"
 
-func digui(age int, num int) int {
-	if num > 0 {
-		age = digui(age+2, num-1)
-	}
-	return age
+func digui(a []int, i int) []int {
+	copy(a[i:], a[i+1:])
+	return a
 }
 
 func main() {
-	fmt.Println(digui(10, 1))
+	a := []int{4, 6, 7, 8, 9}
+	fmt.Println(digui(a, 2))
 }
